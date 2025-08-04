@@ -1,0 +1,46 @@
+---
+- name: Create log-trimming script
+  ansible.builtin.copy:
+    dest: /usr/local/bin/trim-logs.sh
+    src: files/trim-logs.sh
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Setup cron job to run log-trimming daily at 3am
+  ansible.builtin.copy:
+    dest: /etc/cron.d/trim-logs
+    src: files/cron-trim
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Ensure directory for large files exists
+  ansible.builtin.file:
+    path: "{{ large_files_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Generate 13 large files of identical content (100MB each)
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+    owner: root
+    group: root
+    loop:
+      - { src: 'files/output.bin', dest: "{{ large_files_dir }}", mode: '0700'}
+      - { src: 'files/output1.bin', dest: "{{ large_files_dir }}", mode: '0700'}
+      - { src: 'files/output2.bin', dest: "{{ large_files_dir }}", mode: '0644'}
+      - { src: 'files/output3.bin', dest: "{{ large_files_dir }}", mode: '0700'}
+      - { src: 'files/output4.bin', dest: "{{ large_files_dir }}", mode: '0644'}
+      - { src: 'files/output5.bin', dest: "{{ large_files_dir }}", mode: '0700'}
+      - { src: 'files/output6.bin', dest: "{{ large_files_dir }}", mode: '0700'}
+      - { src: 'files/output7.bin', dest: "{{ large_files_dir }}", mode: '0755'}
+      - { src: 'files/output8.bin', dest: "{{ large_files_dir }}", mode: '0700'}
+      - { src: 'files/output9.bin', dest: "{{ large_files_dir }}", mode: '0700'}
+      - { src: 'files/output10.bin', dest: "{{ large_files_dir }}", mode: '0700'}
+      - { src: 'files/output11.bin', dest: "{{ large_files_dir }}", mode: '0700'}
+      - { src: 'files/output12.bin', dest: "{{ large_files_dir }}", mode: '0755'}

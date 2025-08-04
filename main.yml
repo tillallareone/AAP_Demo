@@ -1,38 +1,12 @@
 ---
-- hosts: all
+- name: Configure Base Webserver, Firewall, SSH, Sudoers, Cron and Large Files
+  hosts: os_linux
   become: true
-  tasks:
-    - name: install apache2
-      ansible.builtin.dnf:
-        name: apache2
-        update_cache: true
-        state: latest
 
-    - name: enable mod_rewrite
-      community.general.apache2_module:
-        name: rewrite
-        state: present
-      notify:
-        - restart apache2
+  pre_tasks:
+    - name: Ansible ping pre test
+      ansible.builtin.ping:
 
-    - name: apache2 listen on port 8081
-      ansible.builtin.lineinfile:
-        dest: /etc/apache2/ports.conf
-        regexp: "^Listen 80"
-        line: "Listen 8081"
-      notify:
-        - restart apache2
+  roles:
+    - config
 
-    - name: apache2 virtualhost on port 8081
-      ansible.builtin.lineinfile:
-        dest: /etc/apache2/sites-available/000-default.conf
-        regexp: "^<VirtualHost \\*:80>"
-        line: "<VirtualHost *:8081>"
-      notify:
-        - restart apache2
-
-  handlers:
-    - name: restart apache2
-      ansible.builtin.service:
-        name: apache2
-        state: restarted

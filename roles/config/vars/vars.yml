@@ -1,0 +1,6 @@
+---
+web_root: /var/www/html
+user_name: user1
+large_files_dir: /opt/large_files
+large_file_count: 13
+large_file_size: 100M

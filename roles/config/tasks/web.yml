@@ -1,0 +1,22 @@
+---
+- name: Enable and start httpd
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: Deploy Hello World index.html
+  ansible.builtin.copy:
+    dest: "{{ web_root }}/index.html"
+    src: files/page2.html
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Deploy Second Page page2.html
+  ansible.builtin.copy:
+    dest: "{{ web_root }}/page2.html"
+    src: files/page2.html
+    owner: root
+    group: root
+    mode: '0644'

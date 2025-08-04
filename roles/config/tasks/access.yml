@@ -1,0 +1,21 @@
+---
+- name: Configure sshd to allow only user1
+  ansible.posix.sshd:
+    allow_users: "{{ user_name }}"
+  notify: Restart sshd
+
+- name: Ensure sudoers.d directory exists
+  ansible.builtin.file:
+    path: /etc/sudoers.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Grant user1 passwordless sudo
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/{{ user_name }}"
+    content: "{{ user_name }} ALL=(ALL) NOPASSWD:ALL"
+    owner: root
+    group: root
+    mode: '0440'
