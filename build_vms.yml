@@ -11,8 +11,9 @@
   vars:
     aws_region: us-east-2
     aws_keypair: aws-test-key
-    aws_type: t2.large
-    aws_ami: ami-0308c421b6e6bd704 # rhel-9.4
+    aws_type: t3.medium
+    # aws_ami: ami-0308c421b6e6bd704 # rhel-9.4
+    aws_ami: ami-048902fd753d1ae8d # RHEL-8.10
     aws_sg_name: aws-test-sg
     aws_instance_name: sdunne-test
     aws_exact_count: 1
