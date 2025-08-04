@@ -1,4 +1,5 @@
 - name: Install HTTPD and firewalld
+  tags: install
   ansible.builtin.dnf:
     name:
       - httpd
@@ -6,15 +7,18 @@
     state: present
 
 - name: Setup Webserver
+  tags: install
   ansible.builtin.import_tasks: web.yml
 
 - name: Setup Firewalld
+  tags: install
   ansible.builtin.import_tasks: firewalld.yml
 
 - name: Setup Access
   ansible.builtin.import_tasks: access.yml
 
 - name: Generate files
+  tags: install
   ansible.builtin.import_tasks: files.yml
 
 - name: Revert env
