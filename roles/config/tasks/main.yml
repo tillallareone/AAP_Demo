@@ -1,14 +1,13 @@
 - name: Install HTTPD and firewalld
   ansible.builtin.dnf:
     name:
-      - epel-release
       - httpd
       - firewalld
     state: present
 
 - name: Setup Webserver
   ansible.builtin.import_tasks: web.yml
-  
+
 - name: Setup Firewalld
   ansible.builtin.import_tasks: firewalld.yml
 
@@ -17,3 +16,7 @@
 
 - name: Generate files
   ansible.builtin.import_tasks: files.yml
+
+- name: Revert env
+  tags: destroy
+  ansible.builtin.import_tasks: destroy.yml
