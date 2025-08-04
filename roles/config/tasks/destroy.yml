@@ -1,16 +1,4 @@
 ---
-- name: Stop and disable httpd service
-  ansible.builtin.service:
-    name: httpd
-    state: stopped
-    enabled: false
-
-- name: Stop and disable firewalld service
-  ansible.builtin.service:
-    name: firewalld
-    state: stopped
-    enabled: false
-
 - name: Remove HTTP service from firewalld
   ansible.builtin.firewalld:
     service: http
@@ -32,6 +20,18 @@
     path: "{{ web_root }}"
     state: absent
     recurse: true
+    
+- name: Stop and disable httpd service
+  ansible.builtin.service:
+    name: httpd
+    state: stopped
+    enabled: false
+
+- name: Stop and disable firewalld service
+  ansible.builtin.service:
+    name: firewalld
+    state: stopped
+    enabled: false
 
 - name: Uninstall epel-release, httpd and firewalld packages
   ansible.builtin.dnf:
