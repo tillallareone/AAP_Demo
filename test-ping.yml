@@ -3,8 +3,8 @@
   hosts: "{{ _hosts }}"
   gather_facts: false
 
-  vars_files:
-    - secrets.yml
+#  vars_files:
+#    - secrets.yml
   
   tasks:
     - name: Ansible ping
