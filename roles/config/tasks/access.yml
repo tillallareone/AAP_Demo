@@ -1,8 +1,8 @@
 ---
-- name: Configure sshd to allow only user1
-  ansible.posix.sshd:
-    allow_users: "{{ user_name }}"
-  notify: Restart sshd
+# - name: Configure sshd to allow only user1
+#   ansible.posix.sshd:
+#     allow_users: "{{ user_name }}"
+#   notify: Restart sshd
 
 - name: Ensure sudoers.d directory exists
   ansible.builtin.file:
