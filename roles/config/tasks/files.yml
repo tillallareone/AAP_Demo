@@ -1,5 +1,5 @@
 ---
-- name: Create log-trimming script
+- name: Copy log-trimming script
   ansible.builtin.copy:
     dest: /usr/local/bin/trim-logs.sh
     src: files/trim-logs.sh
@@ -7,7 +7,7 @@
     group: root
     mode: '0755'
 
-- name: Setup cron job to run log-trimming daily at 3am
+- name: Copy cron job to run log-trimming daily at 3am
   ansible.builtin.copy:
     dest: /etc/cron.d/trim-logs
     src: files/cron-trim
@@ -23,7 +23,7 @@
     group: root
     mode: '0755'
 
-- name: Generate 13 large files of identical content (100MB each)
+- name: Copy 13 large files of identical content (100MB each)
   ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"

@@ -7,7 +7,7 @@
     - "{{ web_root }}/index.html"
     - "{{ web_root }}/page2.html"
 
-- name: Uninstall epel-release, httpd and firewalld packages
+- name: Uninstall httpd and firewalld packages
   ansible.builtin.dnf:
     name:
       - httpd
