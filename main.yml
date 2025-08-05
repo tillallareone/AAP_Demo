@@ -1,6 +1,6 @@
 ---
 - name: Configure Base Webserver, Firewall, SSH, Sudoers, Cron and Large Files
-  hosts: os_linux
+  hosts: all
   become: true
 
   pre_tasks:
