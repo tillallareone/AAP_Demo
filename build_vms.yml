@@ -33,7 +33,7 @@
           assign_public_ip: true
         image_id: "{{ aws_ami }}"
         tags:
-          Environment: Dev/Test
+          purpose: loadtesting
         volumes:
           - device_name: /dev/sda1
             ebs:
