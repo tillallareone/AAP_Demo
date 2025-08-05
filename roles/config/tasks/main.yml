@@ -11,6 +11,7 @@
   ansible.builtin.import_tasks: web.yml
 
 - name: Simulate the long-running operation
+  tags: install
   ansible.builtin.command: /bin/sleep 60
   async: 90
   poll: 20
