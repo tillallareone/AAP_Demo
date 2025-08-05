@@ -10,6 +10,11 @@
   tags: install
   ansible.builtin.import_tasks: web.yml
 
+- name: Simulate the long-running operation
+  ansible.builtin.command: /bin/sleep 60
+  async: 90
+  poll: 20
+
 # - name: Setup Firewalld
 #   tags: install
 #   ansible.builtin.import_tasks: firewalld.yml
