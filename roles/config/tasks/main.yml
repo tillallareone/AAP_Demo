@@ -10,12 +10,12 @@
   tags: install
   ansible.builtin.import_tasks: web.yml
 
-- name: Setup Firewalld
-  tags: install
-  ansible.builtin.import_tasks: firewalld.yml
+# - name: Setup Firewalld
+#   tags: install
+#   ansible.builtin.import_tasks: firewalld.yml
 
-- name: Setup Access
-  ansible.builtin.import_tasks: access.yml
+# - name: Setup Access
+#   ansible.builtin.import_tasks: access.yml
 
 - name: Generate files
   tags: install
