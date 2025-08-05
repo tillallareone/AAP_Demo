@@ -1,9 +1,12 @@
 ---
 - name: Remove web content files
   ansible.builtin.file:
-    path: "{{ web_root }}"
+    path: "{{ item }}"
     state: absent
     recurse: true
+  loop:
+    - "{{ web_root }}/index.html"
+    - "{{ web_root }}/page2.html"
 
 - name: Uninstall epel-release, httpd and firewalld packages
   ansible.builtin.dnf:
