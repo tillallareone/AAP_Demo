@@ -1,0 +1,42 @@
+---
+- name: Build aws instance(s)
+  hosts: localhost
+  
+  environment:
+#    AWS_ACCESS_KEY_ID: "{{ aws_access_key }}"
+#    AWS_SECRET_ACCESS_KEY: "{{ aws_secret_key }}"
+  # uncomment above to run with ansible-navigator
+    AWS_REGION: "{{ aws_region }}"
+  
+  vars:
+    aws_region: us-east-2
+    aws_keypair: aws-test-key
+    aws_type: t3.medium
+    # aws_ami: ami-0308c421b6e6bd704 # rhel-9.4
+    aws_ami: ami-048902fd753d1ae8d # RHEL-8.10
+    aws_sg_name: aws-test-sg
+    aws_instance_name: sdunne-test
+    aws_exact_count: 1
+    aws_volume_size: 25
+    aws_public_ip: true
+
+  tasks:
+    - name: Create an instance
+      amazon.aws.ec2_instance:
+        name: "{{ aws_instance_name }}"
+        exact_count: "{{ aws_exact_count }}"
+        key_name: "{{ aws_keypair }}"
+        vpc_subnet_id: subnet-079e08178754f8fd7
+        instance_type: "{{ aws_type }}"
+        security_group: "{{ aws_sg_name }}"
+        network:
+          assign_public_ip: true
+        image_id: "{{ aws_ami }}"
+        tags:
+          Environment: Dev/Test
+        volumes:
+          - device_name: /dev/sda1
+            ebs:
+              volume_size: "{{ aws_volume_size }}"
+              delete_on_termination: true
+      register: instance_info
