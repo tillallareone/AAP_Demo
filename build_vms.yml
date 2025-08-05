@@ -45,6 +45,7 @@
     - name: Terminate instances
       amazon.aws.ec2_instance:
         name: "{{ aws_instance_name }}"
+        vpc_subnet_id: subnet-079e08178754f8fd7
         state: terminated
       tags:
         - terminate
