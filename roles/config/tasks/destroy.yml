@@ -28,4 +28,3 @@
   ansible.builtin.file:
     path: "{{ large_files_dir }}"
     state: absent
-    recurse: true
