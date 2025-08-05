@@ -3,7 +3,6 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: absent
-    recurse: true
   loop:
     - "{{ web_root }}/index.html"
     - "{{ web_root }}/page2.html"
